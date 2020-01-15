@@ -4,11 +4,7 @@
  * @date 2019/11/3-17:25
  */
 import ajax from './ajax'
-
 const BASE_URL = '/api';
-// 测试
-export const _reqGoodsInfo = () => ajax(BASE_URL + '/goods');
-
 // 查看所有学校
 export const getSchool = () => ajax(BASE_URL + '/school');
 // 搜索学校
@@ -35,6 +31,9 @@ export const login = (userEmail, userPassword, flag) => ajax(BASE_URL + `user/1?
 // 遍历商品
 export const getGoodsList = () => ajax(BASE_URL + '/goods');
 // 遍历商品类型
-export const getGoodTypes = () => ajax(BASE_URL + 'goodsType/all');
+export const getGoodTypes = () => ajax(BASE_URL + '/goodsType/all');
 // 遍历失物招领信息
 export const getLostList = () => ajax(BASE_URL+'/lost/1');
+
+// 根据页数查询数据
+export const getGoods = (pageNumber) => ajax(BASE_URL + `/goods/page/${pageNumber}`)
