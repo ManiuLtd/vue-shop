@@ -1,19 +1,24 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <FooterGuide v-show="$route.meta.showFooter"></FooterGuide>
+        <router-view />
     </div>
-    <router-view/>
-  </div>
 </template>
+<script>
+  import FooterGuide from './components/FooterGuide/FooterGuide.vue'
+  export default {
+    data() {
+      return {
 
+      }
+    },
+    components: {
+      FooterGuide
+    }
+  }
+</script>
 <style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
-  margin-top 60px
+    #app
+        font-size 13px
+        font-family: "华文中宋";
 </style>
