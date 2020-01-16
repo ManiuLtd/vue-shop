@@ -5,8 +5,8 @@
 -->
 <template>
     <section class="inform-nav">
-        <van-nav-bar title="失物招领" :fixed="fixed"
-                     right-text="发表" left-arrow
+        <van-nav-bar title="失物招领处" :fixed="fixed"
+                     right-text="发表"
                      @click-right="onClickRight"/>
         <div style="margin-top: 46px">
             <div class="addr">
@@ -39,7 +39,7 @@
         },
         methods: {
             onClickRight() {
-                this.$toast('按钮');
+              this.$router.push({ path:'/lost'  })
             },
         }
     }
@@ -57,7 +57,6 @@
             display: inline-block
             width 100%
             background-color #FFF
-            padding: 0 3%
             border-bottom 1px dotted #847e7e 3 d
             -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);

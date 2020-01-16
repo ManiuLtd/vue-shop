@@ -1,6 +1,6 @@
 <template>
     <div class="tree-nav">
-        <van-nav-bar title="宝贝分类"></van-nav-bar>
+        <van-nav-bar title="宝贝分类"/>
         <div class="shopType">
             <ul>
                 <li v-for="(item, index) in goodsType" :key="index">

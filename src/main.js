@@ -15,7 +15,7 @@ Vue.config.productionTip = false;
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);
-
+// 瀑布流
 import waterfall from 'vue-waterfall2'
 Vue.use(waterfall)
 

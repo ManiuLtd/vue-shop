@@ -118,7 +118,6 @@
 
 <script>
     import {mapGetters} from 'vuex'
-
     export default {
         data() {
             return {
@@ -166,7 +165,7 @@
                 border-radius 5px
 
     header
-        width: 100%;
+        width: 92%;
         padding: 0 4%;
         height: 42px;
         display: flex;
@@ -193,7 +192,7 @@
             margin 0 6px
 
     .user
-        width: 100%;
+        width: 92%;
         padding: 0 4%;
         color #FFF
         display: flex;
@@ -223,7 +222,7 @@
             background: linear-gradient(to left, #fbbb37 0%, #fcf0d0 105%);
 
     .addr
-        width: 96%;
+        width: 94%;
         background-color #FFF
         padding: 8px 3%;
         margin: 12px auto 8px auto;

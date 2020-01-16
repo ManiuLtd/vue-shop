@@ -45,11 +45,10 @@
     }
 
     .spinner {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
         text-align: center;
-        line-height: 120px;
-
+        line-height: 80px;
         position: absolute;
         left: 50%;
         top: 50%;

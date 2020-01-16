@@ -27,17 +27,8 @@
 <script>
   import {mapState} from 'vuex'
   export default {
-    data() {
-      return {
-
-      }
-    },
     computed: {
       ...mapState(['goodsType']),
-      /*
-     根据goodsType一维数组生成一个2维数组
-     小数组中的元素个数最大是2
-      */
       goodsTypeArr () {
         const {goodsType} = this
         const arr = []

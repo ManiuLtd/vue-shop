@@ -1,29 +1,30 @@
 <template>
     <section class="release-nav">
         <van-sticky>
-            <van-nav-bar title="发布宝贝" @click-left="onClickLeft" left-arrow></van-nav-bar>
+            <van-nav-bar title="发布宝贝" @click-left="onClickLeft" left-arrow/>
         </van-sticky>
         <div style="margin-bottom: 60px">
             <van-cell-group style="background-color: #FAFAFA">
                 <div class="addr">
                     <van-row type="flex" justify="space-between">
                         <van-col span="7" style="line-height: 46px;">
-                            <van-icon name="umbrella-circle"></van-icon>
+                            <van-icon name="umbrella-circle"/>
                             <span style="font-size: 13px">标题</span>
                         </van-col>
                         <van-col span="21">
                             <van-field v-model="gTitle" placeholder="宝贝标题不可少" :error-message="error_message"
-                                       error-message-align="right"></van-field>
+                                       error-message-align="right"/>
                         </van-col>
                     </van-row>
                 </div>
                 <div class="addr">
-                    <van-field v-model="gIntroduce" rows="7" autosize type="textarea" placeholder="在这里详细描述一下商品的************"
-                               show-word-limit></van-field>
+                    <van-field v-model="gIntroduce" rows="7" autosize type="textarea"
+                               placeholder="在这里详细描述一下商品的************"
+                               show-word-limit/>
                 </div>
                 <div class="addr">
                     <van-field v-model="gRemark" rows="2" autosize maxlength="5000" label="备注" type="textarea"
-                               placeholder="请输入备注"></van-field>
+                               placeholder="请输入备注"/>
                 </div>
             </van-cell-group>
           <div>
@@ -31,11 +32,11 @@
               <div class="addr">
                   <van-row>
                       <van-col span="7">
-                          <i class="iconfont icon-fengmian1"></i>
+                          <i class="iconfont icon-fengmian1"/>
                           <span>封面</span>
                       </van-col>
                       <van-col>
-                          <van-uploader v-model="picture" :after-read="afterRead_1" :max-count="1"></van-uploader>
+                          <van-uploader v-model="picture" :after-read="afterRead_1" :max-count="1"/>
                       </van-col>
                   </van-row>
               </div>
@@ -43,11 +44,11 @@
               <div class="addr">
                   <van-row>
                       <van-col span="7">
-                          <i class="iconfont icon-fengmian"></i>
+                          <i class="iconfont icon-fengmian"/>
                           <span>商品图片</span>
                       </van-col>
                       <van-col>
-                          <van-uploader v-model="fileList" :after-read="afterRead" multiple></van-uploader>
+                          <van-uploader v-model="fileList" :after-read="afterRead" multiple/>
                       </van-col>
                   </van-row>
               </div>
@@ -55,14 +56,14 @@
               <div class="addr" @click="type = true">
                   <van-row type="flex" justify="space-between" style="width: 100%">
                       <van-col span="7" class="van-temp">
-                          <van-icon name="clock"></van-icon>
+                          <van-icon name="clock"/>
                           <span>选择分类</span>
                       </van-col>
                       <van-col span="6" v-if="gType.length">
                           <span class="choiceType">{{gType[1]}}</span>
                       </van-col>
                       <van-col span="2" v-else>
-                          <van-icon name="arrow"></van-icon>
+                          <van-icon name="arrow"/>
                       </van-col>
                   </van-row>
               </div>
@@ -70,7 +71,7 @@
               <div class="addr" @click="show = true">
                   <van-row type="flex" justify="space-between" style="width: 100%">
                       <van-col span="7" class="van-temp">
-                          <van-icon name="gold-coin"></van-icon>
+                          <van-icon name="gold-coin"/>
                           <span>价格</span>
                       </van-col>
                       <van-col span="5" v-if="gPrice">
@@ -78,7 +79,7 @@
                             <span style="font-weight: 600;">￥</span>{{gPrice}}</span>
                       </van-col>
                       <van-col span="2" v-else>
-                          <van-icon name="arrow"></van-icon>
+                          <van-icon name="arrow"/>
                       </van-col>
                   </van-row>
               </div>
@@ -86,11 +87,11 @@
               <div class="addr">
                   <van-row type="flex" justify="space-between" style="width: 100%">
                       <van-col span="7" class="van-temp">
-                          <van-icon name="bill"></van-icon>
+                          <van-icon name="bill"/>
                           <span>当前库存</span>
                       </van-col>
                       <van-col span="8">
-                          <van-stepper v-model="gNumber" integer></van-stepper>
+                          <van-stepper v-model="gNumber" integer/>
                       </van-col>
                   </van-row>
               </div>
@@ -98,12 +99,12 @@
               <div class="addr">
                   <van-row type="flex" justify="space-between">
                       <van-col span="7" style="line-height: 46px; vertical-align: text-bottom;">
-                          <van-icon name="umbrella-circle"></van-icon>
+                          <van-icon name="umbrella-circle"/>
                           <span style="font-size: 13px">标签</span>
                       </van-col>
                       <van-col span="21">
                           <van-field v-model="gLabel" placeholder="自定义标签，多个标签用#分开" :error-message="error_message"
-                                     error-message-align="right"></van-field>
+                                     error-message-align="right"/>
                       </van-col>
                   </van-row>
               </div>
@@ -129,7 +130,7 @@
 
         </van-popup>
         <div class="footer">
-            <van-button class="release-btn" block @click="submitForm($event)">发布</van-button>
+            <van-button class="release-btn" block @click="submitForm($event)">发布商品</van-button>
         </div>
     </section>
 </template>
@@ -138,6 +139,7 @@
   import axios from 'axios'
   import {Toast} from 'vant'
   import ReleaseGood from '../../components/ReleaseGood/ReleaseGood.vue'
+  import { mapGetters } from 'vuex'
   let formData = new window.FormData()
   export default {
     name: 'Release',
@@ -156,6 +158,9 @@
         gLabel: '', //标签
         fileList: [],
       }
+    },
+    computed: {
+      ...mapGetters(['userInfo'])
     },
     methods: {
       afterRead_1 (file) {
@@ -218,7 +223,8 @@
         position: absolute
         width: 100%;
         background-color #FAFAFA
-
+        .van-cell
+            padding 4px 3px
         .van-cell-group
             padding 6px 0
 
@@ -226,10 +232,10 @@
             padding 8px 12px
 
         .addr
-            width: 88%;
+            width: 92%;
             background-color #FFF
-            padding: 8px 3%;
-            margin: 12px auto 8px auto;
+            padding: 8px 2%;
+            margin: 0 auto 8px;
             -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             border-radius: 8px;

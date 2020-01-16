@@ -1,4 +1,4 @@
-import { getSchool, searchSchool, getGoodTypes, getGoodsList, getLostList } from '../api'
+import { getSchool, searchSchool, getGoodTypes, getGoodsList, getLostList, getGoodsInform } from '../api'
 import * as A from './mutation-types'
 
 export default {
@@ -39,6 +39,14 @@ export default {
     if (result.success) {
       var goodsList = result.data
       commit(A.RECEIVE_GOODS_LIST, { goodsList })
+    }
+  },
+  // 查看商品详情
+  async reqGoodsInform ({ commit }, gId) {
+    const result = await getGoodsInform(gId);
+    if (result.success) {
+      var goodsInform = result.data
+      commit(A.RECEIVE_GOODS_INFORM, { goodsInform })
     }
   },
   // 异步获取失物招领列表

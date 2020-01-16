@@ -6,11 +6,11 @@
 <template>
     <van-pull-refresh v-model="isLoading" success-text="刷新成功" @refresh="onRefresh">
         <div class="home-bg">
-            <HeaderTop></HeaderTop>
-            <Grid></Grid>
-            <div style="z-index: 9999;">
-                <van-notice-bar :text="noticeValue" left-icon="http://img.yzcdn.cn/vant/volume.png"></van-notice-bar>
-                <HomeTab></HomeTab>
+            <HeaderTop/>
+            <Grid/>
+            <div style="margin-bottom: 60px">
+                <van-notice-bar :text="noticeValue" left-icon="http://img.yzcdn.cn/vant/volume.png"/>
+                <HomeTab/>
             </div>
 
         </div>
@@ -39,6 +39,7 @@
     methods: {
       onRefresh() {
         setTimeout(() => {
+          this.$router.go(0)
           this.$toast('刷新成功');
           this.isLoading = false;
         }, 500);

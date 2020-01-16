@@ -1,7 +1,9 @@
 <template>
-    <div class="container-water-fall water-content">
+    <div class="container-water-fall water-content"  v-if="goodsList">
         <waterfall :col="col" :data="data" @loadmore="getMore">
-            <div class="cell-item" v-for="(item,index) in data" :key="index">
+            <router-link class="cell-item" v-for="(item,index) in data" :key="index"
+                         :to="`/goods/${item.id}`" tag="div">
+                <input type="hidden" :value="item.id">
                 <img v-if="item.gPicture" :src="item.gPicture" alt="加载错误">
                 <div class="item-body">
                     <div class="item-desc">{{item.gIntroduce}}</div>
@@ -18,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </router-link>
         </waterfall>
         <loading :show="loading"/>
     </div>
@@ -69,11 +71,12 @@
         this.loadMore();
       },
     },
-
     computed: {
       ...mapState(['goodsList']),
     },
-
+    mounted () {
+      console.log(this.goodsList)
+    }
   }
 </script>
 
@@ -137,7 +140,7 @@
                     color: #333;
                     font-weight: 600;
                     line-height: 18px;
-                    font-size: 12px;
+                    font-size: 11px;
                     overflow: hidden;
                     display: -webkit-box;
                     text-overflow: ellipsis;
