@@ -23,7 +23,7 @@
             <div :id="searchBarFixed === true ? 'scrollBg' :''"></div>
         </div>
         <div style="height: 28px"></div>
-        <Swiper></Swiper>
+        <Swiper/>
     </div>
 </template>
 

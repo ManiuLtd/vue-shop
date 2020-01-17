@@ -9,7 +9,7 @@
             <van-sticky>
                 <van-nav-bar :title="title" left-text="返回" left-arrow @click-left="prev"/>
             </van-sticky>
-            <div style="position: relative;">
+            <div class="list-g">
                 <van-swipe :autoplay="3000" @change="onChange">
                     <van-swipe-item v-for="(picture, index) in goodsPictures" :key="index">
                         <img :src="picture" alt="" class="van-img"/>
@@ -148,7 +148,6 @@
     mounted() {
       const gId = this.$route.params.id
       this.$store.dispatch('reqGoodsInform', gId);
-
       console.log(skuData)
     },
     watch: {
@@ -172,7 +171,7 @@
     },
     methods: {
       // 返回上一级
-      prev () {this.$router.push('/')},
+      prev () {this.$router.go(-1);},
       // 轮播图数字变化
       onChange (index) {this.current = index},
       // 刷新
@@ -196,7 +195,6 @@
     @import "../../assets/stylus/goodsItem.styl"
     .van-img
         width: 100%;
-        height 280px
     .swiper
         width: 100%;
 
@@ -204,6 +202,10 @@
             img
                 width: 100%;
                 height: 100%;
+    .list-g
+        position relative
+        /*height 180px*/
+        overflow: hidden;
 
     .indicator
         padding: 0 10px;

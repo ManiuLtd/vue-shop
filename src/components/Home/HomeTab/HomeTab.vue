@@ -1,5 +1,5 @@
 <template>
-    <div class="container-water-fall water-content"  v-if="goodsList">
+    <div class="container-water-fall water-content">
         <waterfall :col="col" :data="data" @loadmore="getMore">
             <router-link class="cell-item" v-for="(item,index) in data" :key="index"
                          :to="`/goods/${item.id}`" tag="div">
@@ -46,37 +46,37 @@
     components: {
       loading
     },
-    created() {
-      this.loadMore();
+    created () {
+      this.loadMore()
     },
     methods: {
       loadMore () {
         this.loading = true
-        setTimeout(() => {
-          // 根据页数查询数据
-          axios.get("api/goods/page/" + this.pageNumber)
-            .then(result => {
-              if (result.data.success) {
-                this.data = this.data.concat(result.data.data)
+        // 根据页数查询数据
+        axios.get('/api/goods/page/' + this.pageNumber)
+          .then(result => {
+            if (result.data.success) {
+              const _result = JSON.parse(JSON.stringify(result.data.data))
+              if (this.$store.state.userInfo) {
+                _result.forEach((item) => {
+                  const s = eval('(' + item + ')')
+                  this.data = this.data.concat(s)
+                })
               } else {
-                console.log("获取商品失败！");
+                this.data = this.data.concat(_result)
               }
-            });
-          this.loading = false
-        }, 1000)
+            } else {
+              console.log('获取商品失败！')
+            }
+          })
+        this.loading = false
       },
-      getMore() {
-        // 加载更多
-        this.pageNumber++;
-        this.loadMore();
+      getMore () {
+        this.pageNumber++
+        this.loadMore()
       },
     },
-    computed: {
-      ...mapState(['goodsList']),
-    },
-    mounted () {
-      console.log(this.goodsList)
-    }
+
   }
 </script>
 
@@ -164,7 +164,7 @@
 
                         .gSales {
                             color: #c8c8c8;
-                            font-size: 0.24rem;
+                            font-size: 11px;
                         }
                     }
 
@@ -174,7 +174,7 @@
                             padding: 2px 8px;
                             background: rgba(255, 75, 75, .1);
                             border-radius: 1rem;
-                            font-size: .24rem;
+                            font-size: 11px;
                             color: #fd354d;
                         }
                     }

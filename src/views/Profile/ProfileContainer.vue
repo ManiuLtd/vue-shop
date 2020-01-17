@@ -101,18 +101,17 @@
                     <div class="addr">
                         <van-row type="flex" justify="space-between" style="width: 100%">
                             <van-col span="7" class="van-temp">
-                                <van-icon name="setting"></van-icon>
+                                <van-icon name="setting"/>
                                 <span>设置</span>
                             </van-col>
                             <van-col span="2">
-                                <van-icon name="arrow"></van-icon>
+                                <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
                     </div>
                 </div>
             </div>
         </section>
-        <button @click="test">测试</button>
     </div>
 </template>
 

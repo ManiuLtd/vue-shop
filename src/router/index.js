@@ -7,6 +7,9 @@ import Register from '../views/Register/Register.vue'
 import Home from '../views/Home.vue'
 // 商品详情页
 import GoodsList from '../views/Goods/GoodsList.vue'
+// 分类
+import Classify from '../views/Classify/Classify.vue'
+
 // 失物招领
 import ServiceContainer from '../views/Service/ServiceContainer.vue'
 // 发布失物招领信息
@@ -30,13 +33,13 @@ const routes = [
   { path: '/register', name: 'register', component: Register, },
 
   { path: '/', name: 'home', component: Home, meta: { showFooter: true } },
-  {path: "/goods/:id", name: "GoodsList", component: GoodsList,},
-
+  { path: '/goods/:id', name: 'GoodsList', component: GoodsList, },
+  { path: '/classify/:id', name: 'Classify', component: Classify },
   { path: '/service', name: 'ServiceContainer', component: ServiceContainer, meta: { showFooter: true } },
-  {path: '/lost', name: 'LostAndFound', component: LostAndFound},
+  { path: '/lost', name: 'LostAndFound', component: LostAndFound },
 
-  {path: "/message", name: "Message", component: Message, meta: {showFooter: true}},
-  {path: "/chat", name: "Chat", component: Chat},
+  { path: '/message', name: 'Message', component: Message, meta: { showFooter: true } },
+  { path: '/chat', name: 'Chat', component: Chat },
 
   { path: '/release', name: 'Release', component: Release },// 发布商品
   { path: '/profile', name: 'ProfileContainer', component: ProfileContainer, meta: { showFooter: true }, },

@@ -56,18 +56,8 @@
         </van-divider>
         <van-cell-group>
             <van-field v-model="email" required clearable label="邮箱号" right-icon="question-o" placeholder="请输入邮箱号"
-                       @click-right-icon="$toast('question')"></van-field>
-            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required
-                       v-if="showPwd"></van-field>
-            <van-field v-model="password" type="text" label="密码" placeholder="请输入密码" required v-else></van-field>
-            <div class="switch_button off" :class="!showPwd ? 'on' : 'off'"
-                 @click="showPwd=!showPwd">
-                <div class="switch_circle" :class="{right:!showPwd}"></div>
-                <span class="switch_text">
-                    {{ showPwd ? '...' : 'abc' }}
-                </span>
-            </div>
-            <van-field v-model="rePassword" type="password" label="确认密码" placeholder="请确认密码" required></van-field>
+                       @click-right-icon="$toast('question')"/>
+            <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required/>
             <van-row gutter="20">
                 <van-col span="16" style="color: #f06c7a"> 没有账号？<b @click="goTo('/register')">立即注册</b></van-col>
                 <van-col span="8">
@@ -77,7 +67,7 @@
 
         </van-cell-group>
         <div class="loginButton">
-            <van-button style="background-color: #f06c7a; color: #FFF" block  @click="login">登录</van-button>
+            <van-button style="background-color: #f06c7a; color: #FFF" block @click="login">登录</van-button>
         </div>
         <van-divider :style="{ color: '#f06c7a', borderColor: '#f06c7a', padding: '0 16px' }">使用第三方平台登录</van-divider>
         <van-row type="flex" justify="center">
@@ -95,12 +85,12 @@
 </template>
 
 <script>
-  import {login} from "../../api";
-  import {Toast} from 'vant'
+  import { login } from '../../api'
+  import { Toast } from 'vant'
 
   export default {
     name: 'login',
-    data() {
+    data () {
       return {
         email: '',
         password: '',
@@ -110,51 +100,49 @@
       }
     },
     computed: {
-      rightEmail() {
-        var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g;
-        return regEmail.test(this.email);
+      rightEmail () {
+        var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g
+        return regEmail.test(this.email)
       }
     },
     methods: {
-      goTo(path) {
+      goTo (path) {
         this.$router.replace(path)
       },
       // 信息提示
-      showAlert(alertText) {
+      showAlert (alertText) {
         Toast({
           message: alertText,
           duration: 2500
-        });
+        })
       },
-      async login() {
+      async login () {
         if (this.flag) {
-          this.flag = 1;
+          this.flag = 1
         } else {
-          this.flag = 0;
+          this.flag = 0
         }
-        const {email, password, rePassword, flag, showAlert} = this;
+        const { email, password, rePassword, flag, showAlert } = this
         if (!email) {
           showAlert('请输入邮箱号！')
         } else if (!password) {
           showAlert('请输入登录密码！')
-        } else if (password !== rePassword) {
-          showAlert('两次密码不一致！')
         } else {
-          console.log(flag);
-          let result = await login(email, password, flag);
-          console.log(result);
+          console.log(flag)
+          let result = await login(email, password, flag)
+          console.log(result)
           if (result.success) {
-            showAlert(result.msg);
-            const user = result.data;
-            var session = window.sessionStorage;
-            var d = JSON.stringify(user);
-            session.setItem("data", d);
-            let userInfo = JSON.parse(sessionStorage.getItem("data"));
+            showAlert(result.msg)
+            const user = result.data
+            var session = window.sessionStorage
+            var d = JSON.stringify(user)
+            session.setItem('data', d)
+            let userInfo = JSON.parse(sessionStorage.getItem('data'))
             // 将user保存到vuex的state
-            this.$store.dispatch("recordUser", userInfo);
-            this.$router.go(-1);
+            this.$store.dispatch('recordUser', userInfo)
+            this.$router.go(-1)
           } else {
-            showAlert(result.msg);
+            showAlert(result.msg)
           }
         }
       }

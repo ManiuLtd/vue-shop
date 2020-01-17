@@ -62,10 +62,10 @@
         <form @submit.prevent="register">
             <van-cell-group>
                 <van-field v-model="email" required label="邮箱号" placeholder="请输入邮箱号" error-message-align="right"
-                           :error-message="error_message"></van-field>
+                           :error-message="error_message"/>
                 <van-field v-model="password" type="password" label="密码" placeholder="请输入密码" required
-                           v-if="showPwd"></van-field>
-                <van-field v-model="password" type="text" label="密码" placeholder="请输入密码" required v-else></van-field>
+                           v-if="showPwd"/>
+                <van-field v-model="password" type="text" label="密码" placeholder="请输入密码" required v-else/>
                 <div class="switch_button off" :class="!showPwd ? 'on' : 'off'"
                      @click="showPwd=!showPwd">
                     <div class="switch_circle" :class="{right:!showPwd}"></div>
@@ -73,6 +73,7 @@
                         {{ showPwd ? '...' : 'abc' }}
                     </span>
                 </div>
+                <van-field v-model="rePassword" type="password" label="确认密码" placeholder="请确认密码" required/>
                 <van-field v-model="code" center required clearable label="验证码" placeholder="邮箱验证码">
                     <van-button slot="button" size="small" type="warning" :disabled="!rightEmail"
                                 @click.prevent="getCode">
@@ -80,7 +81,7 @@
                     </van-button>
                 </van-field>
                 <van-field v-model="u_school" required label="学校"
-                           placeholder="请选择学校所在地" @click="show = true"></van-field>
+                           placeholder="请选择学校所在地" @click="show = true"/>
                 <div style="padding: 8px;">你选择的是： {{radio}}</div>
             </van-cell-group>
             <div class="loginButton">
@@ -93,7 +94,7 @@
         <van-popup v-model="show" position="bottom" :style="{ height: '100%' }">
             <div style="position: fixed; width: 100%; z-index: 99;">
                 <van-search v-model="value" shape="round" placeholder="请输入学校关键词"
-                            @search="onSearch"></van-search>
+                            @search="onSearch"/>
             </div>
             <div style="height: 50px;"></div>
             <div style="margin-bottom: 36px;">
@@ -121,6 +122,7 @@
       return {
         email: '',
         password: '',
+        rePassword: '',
         code: '',
         u_school: '',
         error_message: '',
@@ -224,7 +226,7 @@
         }
       },
       async register() {
-        const {email, password, code, radio, showAlert, rightEmail} = this;
+        const {email, password, rePassword, code, radio, showAlert, rightEmail} = this;
         if (!email) {
           showAlert('请先输入邮箱号！');
           return false
@@ -237,6 +239,8 @@
         } else if (!code) {
           showAlert('验证码不能为空！');
           return false
+        } else if (password !== rePassword) {
+          showAlert('两次密码不一致！')
         } else if (!radio) {
           showAlert('请选择学校！');
           return false

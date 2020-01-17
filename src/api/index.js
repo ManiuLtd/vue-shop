@@ -32,6 +32,8 @@ export const login = (userEmail, userPassword, flag) => ajax(BASE_URL + `user/1?
 export const getGoodsList = () => ajax(BASE_URL + '/goods');
 // 遍历商品类型
 export const getGoodTypes = () => ajax(BASE_URL + '/goodsType/all');
+// 根据类型查询商品
+export const getTypeGoods = (pageNumber, size, tId) => ajax(BASE_URL+'/goods/getPageByType/'+`${pageNumber}/`+`${tId}/` + `${size}`)
 // 查看商品的详情
 export const getGoodsInform = (gId) => ajax(BASE_URL + '/goods/2/'+`${gId}`)
 // 遍历失物招领信息

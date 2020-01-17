@@ -10,13 +10,13 @@
         <div class="swiper-container" v-if="goodsType">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(goodsTypes, index) in goodsTypeArr" :key="index">
-                    <a href="javascript:" class="link_to_nav" v-for="(goodsType, index) in goodsTypes"
+                    <router-link :to="`/classify/${goodsType.id}`" tag="div" class="link_to_nav" v-for="(goodsType, index) in goodsTypes"
                        :key="index">
                         <div class="nav_container">
                             <img :src="goodsType.ico" alt="">
                         </div>
                         <span>{{goodsType.name}}</span>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>
@@ -27,6 +27,9 @@
 <script>
   import {mapState} from 'vuex'
   export default {
+    mounted() {
+      this.$store.dispatch('reqGoodsType');
+    },
     computed: {
       ...mapState(['goodsType']),
       goodsTypeArr () {
@@ -35,23 +38,18 @@
         let minArr = []
         // 遍历goodsType
         goodsType.forEach(c => {
-          // 如果当前小数组已经满了, 创建一个新的
           if (minArr.length === 2) {
             minArr = []
           }
-          // 如果minArr是空的, 将小数组保存到大数组中
           if (minArr.length === 0) {
             arr.push(minArr)
           }
-          // 将当前分类保存到小数组中
           minArr.push(c)
         })
         return arr
       }
     },
-    mounted() {
-      this.$store.dispatch('reqGoodsType');
-    },
+
   }
 </script>
 
