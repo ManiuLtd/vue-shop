@@ -4,13 +4,13 @@
             <header>
                 <div class="icon-btn">
                     <router-link to="/message">
-                        <van-icon name="more-o"></van-icon>
+                        <van-icon name="more-o"/>
                     </router-link>
                     <router-link v-if="userInfo" to="/setting">
-                        <van-icon name="setting-o"></van-icon>
+                        <van-icon name="setting-o"/>
                     </router-link>
                     <router-link v-else to="/login">
-                        <van-icon name="setting-o"></van-icon>
+                        <van-icon name="setting-o"/>
                     </router-link>
                 </div>
             </header>
@@ -45,7 +45,7 @@
                             <van-col span="18" class="van-temp">浏览历史</van-col>
                             <van-col span="6" style="color: #17e6a1">
                                 查看全部
-                                <van-icon name="arrow"></van-icon>
+                                <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
                         <div class="view-img">
@@ -55,45 +55,60 @@
                     <div class="addr">
                         <van-row type="flex" justify="space-between" style="width: 100%">
                             <van-col span="7" class="van-temp">
-                                <van-icon name="gold-coin"></van-icon>
+                                <van-icon name="gold-coin"/>
                                 <span>我的资金</span>
                             </van-col>
                             <van-col span="2">
-                                <van-icon name="arrow"></van-icon>
+                                <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
                     </div>
                     <div class="addr">
                         <van-row type="flex" justify="space-between" style="width: 100%">
                             <van-col span="7" class="van-temp">
-                                <van-icon name="star"></van-icon>
+                                <van-icon name="star"/>
                                 <span>我的收藏</span>
                             </van-col>
                             <van-col span="2">
-                                <van-icon name="arrow"></van-icon>
+                                <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
                     </div>
                     <div class="addr">
-                        <van-row type="flex" justify="space-between" style="width: 100%">
-                            <van-col span="7" class="van-temp">
-                                <van-icon name="invition"></van-icon>
-                                <span>全部订单</span>
-                            </van-col>
-                            <van-col span="2">
-                                <van-icon name="arrow"></van-icon>
-                            </van-col>
-                        </van-row>
+                       <router-link :to="userInfo ? '/allOrder': '/login'" tag="div">
+                           <van-row type="flex" justify="space-between" style="width: 100%">
+                               <van-col span="7" class="van-temp">
+                                   <van-icon name="invition"/>
+                                   <span>全部订单</span>
+                               </van-col>
+                               <van-col span="2">
+                                   <van-icon name="arrow"/>
+                               </van-col>
+                           </van-row>
+                       </router-link>
+                    </div>
+                    <div class="addr">
+                        <router-link :to="userInfo ? '/ownGoods': '/login'" tag="div">
+                            <van-row type="flex" justify="space-between" style="width: 100%">
+                                <van-col span="7" class="van-temp">
+                                    <van-icon name="invition"/>
+                                    <span>已发布商品</span>
+                                </van-col>
+                                <van-col span="2">
+                                    <van-icon name="arrow"/>
+                                </van-col>
+                            </van-row>
+                        </router-link>
                     </div>
                     <div class="addr">
                         <router-link to="/release">
                             <van-row type="flex" justify="space-between" style="width: 100%">
                                 <van-col span="7" class="van-temp">
-                                    <van-icon name="hot"></van-icon>
+                                    <van-icon name="hot"/>
                                     <span>晒商品</span>
                                 </van-col>
                                 <van-col span="2">
-                                    <van-icon name="arrow"></van-icon>
+                                    <van-icon name="arrow"/>
                                 </van-col>
                             </van-row>
                         </router-link>
@@ -221,7 +236,7 @@
             background: linear-gradient(to left, #fbbb37 0%, #fcf0d0 105%);
 
     .addr
-        width: 94%;
+        width: 90%;
         background-color #FFF
         padding: 8px 3%;
         margin: 12px auto 8px auto;

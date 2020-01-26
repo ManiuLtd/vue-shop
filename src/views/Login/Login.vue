@@ -122,7 +122,7 @@
         } else {
           this.flag = 0
         }
-        const { email, password, rePassword, flag, showAlert } = this
+        const { email, password, flag, showAlert } = this
         if (!email) {
           showAlert('请输入邮箱号！')
         } else if (!password) {

@@ -148,7 +148,6 @@
     mounted() {
       const gId = this.$route.params.id
       this.$store.dispatch('reqGoodsInform', gId);
-      console.log(skuData)
     },
     watch: {
         goodsInform() {

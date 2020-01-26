@@ -7,6 +7,7 @@ import Register from '../views/Register/Register.vue'
 import Home from '../views/Home.vue'
 // 商品详情页
 import GoodsList from '../views/Goods/GoodsList.vue'
+import Order from '../views/Order/Order.vue'
 // 分类
 import Classify from '../views/Classify/Classify.vue'
 
@@ -21,6 +22,12 @@ import Message from '../views/Message/Message.vue'
 import Chat from '../views/Chat/Chat.vue'
 // 个人中心
 import ProfileContainer from '../views/Profile/ProfileContainer.vue'
+// 用户查看自己发布的所有商品
+import ReleaseList from '../views/User/Release/ReleaseList.vue'
+// 用户查看自己发布的商品的详情
+import GoodsDetail from '../views/User/Release/SeeOwnGooods.vue'
+// 返回用户的所有的订单信息
+import AllOrderList from '../views/User/AllOrder/AllOrderList.vue'
 // 设置
 import Setting from '../views/User/Setting/Setting.vue'
 // 个人信息
@@ -29,30 +36,33 @@ import PersonInform from '../views/User/PersonInform/PersonInform.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/login', name: 'login', component: Login, },
-  { path: '/register', name: 'register', component: Register, },
+    { path: '/login', name: 'login', component: Login, },
+    { path: '/register', name: 'register', component: Register, },
 
-  { path: '/', name: 'home', component: Home, meta: { showFooter: true } },
-  { path: '/goods/:id', name: 'GoodsList', component: GoodsList, },
-  { path: '/classify/:id', name: 'Classify', component: Classify },
-  { path: '/service', name: 'ServiceContainer', component: ServiceContainer, meta: { showFooter: true } },
-  { path: '/lost', name: 'LostAndFound', component: LostAndFound },
+    { path: '/', name: 'home', component: Home, meta: { showFooter: true } },
+    { path: '/goods/:id', name: 'GoodsList', component: GoodsList, },
+    { path: '/order/:id', name: 'Order', component: Order, },
+    { path: '/classify/:id', name: 'Classify', component: Classify },
+    { path: '/service', name: 'ServiceContainer', component: ServiceContainer, meta: { showFooter: true } },
+    { path: '/lost', name: 'LostAndFound', component: LostAndFound },
 
-  { path: '/message', name: 'Message', component: Message, meta: { showFooter: true } },
-  { path: '/chat', name: 'Chat', component: Chat },
+    { path: '/message', name: 'Message', component: Message, meta: { showFooter: true } },
+    { path: '/chat', name: 'Chat', component: Chat },
 
-  { path: '/release', name: 'Release', component: Release },// 发布商品
-  { path: '/profile', name: 'ProfileContainer', component: ProfileContainer, meta: { showFooter: true }, },
-  { path: '/setting', name: Setting, component: Setting }, // 设置
-  { path: '/person', name: PersonInform, component: PersonInform },// 个人信息
-
-  { path: '/about', name: 'about', component: () => import('../views/About.vue') }
+    { path: '/release', name: 'Release', component: Release },// 发布商品
+    { path: '/profile', name: 'ProfileContainer', component: ProfileContainer, meta: { showFooter: true }, },
+    { path: '/setting', name: 'Setting', component: Setting }, // 设置
+    { path: '/ownGoods', name: 'ReleaseList', component: ReleaseList }, // 用户查看自己发布的所有商品
+    { path: '/ownGoods/:id', name: 'GoodsDetail', component: GoodsDetail },// 用户查看自己发布的商品的详情
+    { path: '/allOrder', name: 'AllOrderList', component: AllOrderList },// 返回用户的所有的订单信息
+    { path: '/person', name: 'PersonInform', component: PersonInform },// 个人信息
+    { path: '/about', name: 'about', component: () => import('../views/About.vue') }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes
 })
 
 export default router

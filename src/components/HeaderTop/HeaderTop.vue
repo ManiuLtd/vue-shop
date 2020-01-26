@@ -92,7 +92,8 @@
         zoom 1
     .header-fixed{
         position: fixed
-        height 40px
+        height 36px
+        line-height 36px
         z-index 999999
         width 100%
         background-color #f06c7a
@@ -104,7 +105,7 @@
             width 15%
             padding: .07rem .25rem 0 .2rem
             color: #fff
-            font-size 15px
+            font-size 13px
             .van-icon-arrow-down
                 position: relative;
                 top: 3px;
@@ -129,7 +130,7 @@
                     border: none;
                     color: #222;
                     font-size: 12px;
-                    line-height: 27px;
+                    line-height: 29px;
         .header-icon
             display: inline-block
             color #FFF

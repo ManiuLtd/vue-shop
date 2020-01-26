@@ -196,7 +196,7 @@
 
                             .gSales {
                                 color: #c8c8c8;
-                                font-size: 0.24rem;
+                                font-size: 11px;
                             }
                         }
 
@@ -206,7 +206,7 @@
                                 padding: 2px 8px;
                                 background: rgba(255, 75, 75, .1);
                                 border-radius: 1rem;
-                                font-size: .24rem;
+                                font-size: 11px;
                                 color: #fd354d;
                             }
                         }

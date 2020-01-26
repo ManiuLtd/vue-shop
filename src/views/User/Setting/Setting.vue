@@ -1,16 +1,16 @@
 <template>
    <div>
        <section  v-if="security">
-           <Security></Security>
+           <Security/>
        </section>
        <section v-else class="inform-nav">
-           <van-nav-bar title="设置" left-arrow :fixed="fixed" @click-left="onClickLeft"></van-nav-bar>
+           <van-nav-bar title="设置" left-arrow :fixed="fixed" @click-left="onClickLeft"/>
            <div style="margin-top: 46px">
                <router-link to="/person" class="addr">
                    <van-row type="flex" justify="space-between">
                        <van-col span="5">个人资料</van-col>
                        <van-col span="1" class="t-right">
-                           <van-icon name="arrow"></van-icon>
+                           <van-icon name="arrow"/>
                        </van-col>
                    </van-row>
                </router-link>
@@ -18,7 +18,7 @@
                    <van-row type="flex" justify="space-between">
                        <van-col span="6">账户与安全</van-col>
                        <van-col span="1" class="t-right">
-                           <van-icon name="arrow"></van-icon>
+                           <van-icon name="arrow"/>
                        </van-col>
                    </van-row>
                </div>
@@ -70,7 +70,7 @@
             color #f06c7a
         .addr
             display: inline-block
-            width 100%
+            width 94%
             background-color #FFF
             padding: 0 3%
             border-bottom 1px dotted #847e7e 3 d

@@ -232,10 +232,10 @@
             padding 8px 12px
 
         .addr
-            width: 92%;
+            width: 90%;
             background-color #FFF
-            padding: 8px 2%;
-            margin: 0 auto 8px;
+            padding: 8px 3%;
+            margin: 12px auto 8px auto;
             -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             border-radius: 8px;

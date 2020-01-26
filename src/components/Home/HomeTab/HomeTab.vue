@@ -27,57 +27,59 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import axios from 'axios'
-  import loading from '../../Loading.vue'
+    import { mapGetters, mapState } from 'vuex'
+    import axios from 'axios'
+    import loading from '../../Loading.vue'
 
-  export default {
-    props: {
-      title: String
-    },
-    data () {
-      return {
-        data: [],
-        col: 2,
-        loading: false,
-        pageNumber: 1, // 默认展示第一页数据
-      }
-    },
-    components: {
-      loading
-    },
-    created () {
-      this.loadMore()
-    },
-    methods: {
-      loadMore () {
-        this.loading = true
-        // 根据页数查询数据
-        axios.get('/api/goods/page/' + this.pageNumber)
-          .then(result => {
-            if (result.data.success) {
-              const _result = JSON.parse(JSON.stringify(result.data.data))
-              if (this.$store.state.userInfo) {
-                _result.forEach((item) => {
-                  const s = eval('(' + item + ')')
-                  this.data = this.data.concat(s)
-                })
-              } else {
-                this.data = this.data.concat(_result)
-              }
-            } else {
-              console.log('获取商品失败！')
+    export default {
+        props: {
+            title: String
+        },
+        data () {
+            return {
+                data: [],
+                col: 2,
+                loading: false,
+                pageNumber: 1, // 默认展示第一页数据
             }
-          })
-        this.loading = false
-      },
-      getMore () {
-        this.pageNumber++
-        this.loadMore()
-      },
-    },
-
-  }
+        },
+        components: {
+            loading
+        },
+        created () {
+            this.loadMore()
+        },
+        computed: {
+            ...mapGetters(['userInfo'])
+        },
+        methods: {
+            loadMore () {
+                this.loading = true
+                // 根据页数查询数据
+                axios.get('/api/goods/page/' + this.pageNumber)
+                    .then(result => {
+                        if (result.data.success) {
+                            const _result = JSON.parse(JSON.stringify(result.data.data))
+                            if (this.$store.state.userInfo) {
+                                _result.forEach((item) => {
+                                    const s = eval('(' + item + ')')
+                                    this.data = this.data.concat(s)
+                                })
+                            } else {
+                                this.data = this.data.concat(_result)
+                            }
+                        } else {
+                            console.log('获取商品失败！')
+                        }
+                    })
+                this.loading = false
+            },
+            getMore () {
+                this.pageNumber++
+                this.loadMore()
+            },
+        },
+    }
 </script>
 
 <style lang="scss" scoped>

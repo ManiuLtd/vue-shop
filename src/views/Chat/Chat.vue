@@ -10,7 +10,6 @@
                     :title=$route.query.name
                     left-arrow
                     @click-left="onClickLeft"/>
-
         </van-sticky>
         <div id="content">
             <ul id="save">
