@@ -27,7 +27,8 @@ import ReleaseList from '../views/User/Release/ReleaseList.vue'
 // 用户查看自己发布的商品的详情
 import GoodsDetail from '../views/User/Release/SeeOwnGooods.vue'
 // 返回用户的所有的订单信息
-import AllOrderList from '../views/User/AllOrder/AllOrderList.vue'
+import OrderInList from '../views/User/AllOrder/OrderInList.vue'
+import OrderOutList from '../views/User/AllOrder/OrderOutList.vue'
 // 设置
 import Setting from '../views/User/Setting/Setting.vue'
 // 个人信息
@@ -54,7 +55,8 @@ const routes = [
     { path: '/setting', name: 'Setting', component: Setting }, // 设置
     { path: '/ownGoods', name: 'ReleaseList', component: ReleaseList }, // 用户查看自己发布的所有商品
     { path: '/ownGoods/:id', name: 'GoodsDetail', component: GoodsDetail },// 用户查看自己发布的商品的详情
-    { path: '/allOrder', name: 'AllOrderList', component: AllOrderList },// 返回用户的所有的订单信息
+    { path: '/orderInList', name: 'OrderInList', component: OrderInList },// 返回用户的所有的订单信息
+    { path: '/orderOutList', name: 'OrderOutList', component: OrderOutList },// 返回用户的所有的订单信息
     { path: '/person', name: 'PersonInform', component: PersonInform },// 个人信息
     { path: '/about', name: 'about', component: () => import('../views/About.vue') }
 ]

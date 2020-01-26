@@ -39,7 +39,7 @@
                         <van-col span="24">点击昵称跳转到登录/注册页</van-col>
                     </van-row>
                 </div>
-                <div style="margin-top: -37px">
+                <div style="margin-top: -37px;  margin-bottom: 57px">
                     <div class="addr">
                         <van-row style="padding: 3px 0 5px">
                             <van-col span="18" class="van-temp">浏览历史</van-col>
@@ -58,7 +58,7 @@
                                 <van-icon name="gold-coin"/>
                                 <span>我的资金</span>
                             </van-col>
-                            <van-col span="2">
+                            <van-col span="1">
                                 <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
@@ -69,23 +69,32 @@
                                 <van-icon name="star"/>
                                 <span>我的收藏</span>
                             </van-col>
-                            <van-col span="2">
+                            <van-col span="1">
                                 <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
                     </div>
                     <div class="addr">
-                       <router-link :to="userInfo ? '/allOrder': '/login'" tag="div">
-                           <van-row type="flex" justify="space-between" style="width: 100%">
-                               <van-col span="7" class="van-temp">
-                                   <van-icon name="invition"/>
-                                   <span>全部订单</span>
-                               </van-col>
-                               <van-col span="2">
-                                   <van-icon name="arrow"/>
-                               </van-col>
-                           </van-row>
-                       </router-link>
+                           <div style="width: 100%">
+                               <van-row type="flex" justify="space-between" style="width: 100%">
+                                   <van-col span="24" class="van-temp">
+                                       <van-icon name="balance-list" />
+                                       <span>全部订单</span>
+                                   </van-col>
+                               </van-row>
+                           </div>
+                           <div class="order-m">
+                               <ul>
+                                   <li @click="goTo(userInfo ? 'orderOutList': 'login')">
+                                       <van-icon name="coupon-o" />
+                                       <b>我卖出的</b>
+                                   </li>
+                                   <li @click="goTo(userInfo ? 'orderInList': 'login')">
+                                       <van-icon name="refund-o" />
+                                       <b>我买到的</b>
+                                   </li>
+                               </ul>
+                           </div>
                     </div>
                     <div class="addr">
                         <router-link :to="userInfo ? '/ownGoods': '/login'" tag="div">
@@ -94,7 +103,7 @@
                                     <van-icon name="invition"/>
                                     <span>已发布商品</span>
                                 </van-col>
-                                <van-col span="2">
+                                <van-col span="1">
                                     <van-icon name="arrow"/>
                                 </van-col>
                             </van-row>
@@ -107,7 +116,7 @@
                                     <van-icon name="hot"/>
                                     <span>晒商品</span>
                                 </van-col>
-                                <van-col span="2">
+                                <van-col span="1">
                                     <van-icon name="arrow"/>
                                 </van-col>
                             </van-row>
@@ -119,7 +128,7 @@
                                 <van-icon name="setting"/>
                                 <span>设置</span>
                             </van-col>
-                            <van-col span="2">
+                            <van-col span="1">
                                 <van-icon name="arrow"/>
                             </van-col>
                         </van-row>
@@ -148,7 +157,7 @@
         },
         methods: {
             goTo(path) {
-                this.$router.replace(path)
+                this.$router.push(path)
             },
             test() {
                 let myName = JSON.parse(sessionStorage.getItem("data"));
@@ -243,6 +252,27 @@
         -webkit-box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
+        .an-row--justify-space-between
+            font-size 13px
+            font-weight: 700;
+        .order-m
+            ul
+                padding 12px 12%
+                li
+                    list-style-type none
+                    display inline-block
+                    padding 3px 12%
+                    text-align center
+                    .van-icon-coupon-o
+                        color #FC7843
+                    .van-icon-refund-o
+                        color #FD5B01
+                    i
+                        font-size 24px
+                    b
+                        display block
+                        margin-top: 12px;
+
 
         a
             color #000
@@ -278,6 +308,9 @@
         .van-icon-hot
             font-size 16px
             color #ee883b
+        .van-icon-balance-list
+            font-size 16px
+            color #FEE70F
 
         .van-icon-invition
             font-size 16px
