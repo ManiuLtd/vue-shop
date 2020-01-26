@@ -107,7 +107,6 @@ export default {
         const result = await getAllOrder()
         if (result.success) {
             var allOrderList = result.data
-            console.log(allOrderList)
             commit(A.RECEIVE_ORDER_LIST, { allOrderList })
         }
     },

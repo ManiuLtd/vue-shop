@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
 Vue.config.productionTip = false
 //开启debug模式
 import axios from 'axios';

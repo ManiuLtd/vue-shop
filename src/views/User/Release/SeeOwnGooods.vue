@@ -16,7 +16,9 @@
             <div class="mui-card">
                 <van-row style="width: 100%;">
                     <van-col span="6" class="order-img">
-                        <img alt="" :src="goodsInform.goods.gPicture">
+                        <div style="height: 81px;overflow:hidden;">
+                            <img alt="" :src="goodsInform.goods.gPicture">
+                        </div>
                     </van-col>
                     <van-col style="text-align: left" span="18">
                         <div class="in-l span-r">标题： {{goodsInform.goods.gTitle}}</div>
@@ -130,7 +132,8 @@
         text-align center
 
         img
-            width 59px
+            width: 95%;
+            border-radius: 3px;
 
     .in-l
         margin 6px 0

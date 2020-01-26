@@ -6,12 +6,7 @@
 <template>
     <div class="order-nav">
         <van-sticky>
-            <van-nav-bar
-                    title="确认订单"
-                    left-text="返回"
-                    left-arrow
-                    @click-left="prev">
-            </van-nav-bar>
+            <van-nav-bar title="确认订单"/>
         </van-sticky>
         <div class="addr">
             <van-row>
@@ -32,13 +27,13 @@
         </div>
         <div class="addr" @click="getDescribe">
             <van-row style="width: 100%;">
-                <van-col span="6" class="order-img">
+                <div style="height: 81px;overflow:hidden;">
                     <img :src="goods.gPicture" alt="">
-                </van-col>
+                </div>
                 <van-col span="18">
                     <van-row>
                         <van-col span="24" class="order-item">{{goods.gIntroduce}}</van-col>
-                        <van-col span="24"><van-divider /></van-col>
+                        <van-col span="24" style=" padding-left: 12px"><van-divider /></van-col>
                         <van-col span="24" class="order-price">￥ {{goods.gPrice}}</van-col>
                     </van-row>
                 </van-col>
@@ -96,14 +91,10 @@
             this.$store.dispatch('reqGoodsInform', gId)
             this.user = this.goodsInform.user
             this.goods = this.goodsInform.goods
-            console.log(gId)
-            console.log(this.goods.id)
+            // console.log(gId)
+            // console.log(this.goods.id)
         },
         methods: {
-            prev () {
-                const id = this.$route.params.id
-                this.$router.push(`/goods/${id}`)
-            },
             getDescribe() {
                 const id = this.$route.params.id
                 this.$router.push(`/goods/${id}`)
@@ -146,15 +137,17 @@
             .order-img
                 margin-top 4px
                 img
-                    width 59px
+                    width: 95%;
+                    border-radius: 3px;
 
             .order-price
                 color #f06c7a
 
             .order-item
+                padding-left 12px
                 text-overflow: -o-ellipsis-lastline;
                 overflow: hidden;
-                line-height 16px!important
+                line-height 21px!important
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
@@ -174,18 +167,4 @@
         margin-top 2px
         text-align center
 
-    .van-input-input
-        width 168%
-        height 100%
-        background: none;
-        color: inherit;
-        opacity: 1;
-        -webkit-text-fill-color: currentcolor;
-        font: inherit;
-        line-height: inherit;
-        letter-spacing: inherit;
-        text-align: inherit;
-        text-indent: inherit;
-        text-transform: inherit;
-        text-shadow: inherit;
 </style>

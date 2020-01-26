@@ -14,7 +14,9 @@
             <router-link tag="div" :to="`/ownGoods/${goods.id}`">
                 <van-row style="width: 100%;">
                     <van-col span="6" class="order-img">
-                        <img alt="" :src="goods.gPicture">
+                        <div style="height: 81px;overflow:hidden;">
+                            <img :src="goods.gPicture" alt="">
+                        </div>
                     </van-col>
                     <van-col span="18">
                         <van-row>
@@ -73,9 +75,10 @@
             box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             .order-item
+                padding-left 12px
                 text-overflow: -o-ellipsis-lastline;
                 overflow: hidden;
-                line-height 16px!important
+                line-height 21px!important
                 text-overflow: ellipsis;
                 display: -webkit-box;
                 -webkit-line-clamp: 3;
@@ -85,7 +88,8 @@
                 margin-top 4px
                 text-align center
                 img
-                    width 59px
+                    width: 95%;
+                    border-radius: 3px;
             .order-price
                 color #f06c7a
             .span-g

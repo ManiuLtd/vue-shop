@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { mapGetters, mapState } from 'vuex'
+    import { mapGetters } from 'vuex'
     import axios from 'axios'
     import loading from '../../Loading.vue'
 
@@ -60,7 +60,9 @@
                     .then(result => {
                         if (result.data.success) {
                             const _result = JSON.parse(JSON.stringify(result.data.data))
-                            if (this.$store.state.userInfo) {
+                            // console.log(_result)
+                            console.log(this.userInfo)
+                            if (this.userInfo) {
                                 _result.forEach((item) => {
                                     const s = eval('(' + item + ')')
                                     this.data = this.data.concat(s)
