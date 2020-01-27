@@ -5,57 +5,59 @@
                 <span style="vertical-align: -3px"><van-icon name="arrow-left"/></span>
                 <span>返回</span>
             </div>
-            <div class="ownGoods">我的订单</div>
+            <div class="ownGoods">我买到的</div>
         </div>
         <div style="height: 41px"></div>
-        <div class="addr" v-for="(orderIn, index) in orderInList" :key="index">
-            <div class="head-t">
-                <img :src="orderIn.user.uHead" alt="">
-                <span>{{orderIn.user.uEmail}}</span>
-                <span class="order-z">
-                    <van-tag v-if="orderIn.order.whetherDealt === 0" type="success">等待卖家确认</van-tag>
-                    <van-tag v-if="orderIn.order.whetherDealt === 1" type="warning">卖家已确认</van-tag>
-                    <van-tag v-if="orderIn.order.whetherDealt === 2" type="primary">订单已完成</van-tag>
-                    <van-tag v-if="orderIn.order.whetherDealt === 3" type="danger">订单已失效</van-tag>
-                    <van-tag v-if="orderIn.order.whetherDealt === 4">卖家取消</van-tag>
-                </span>
-            </div>
-            <div style="width: 100%;">
-                <van-row>
-                    <van-col span="6" class="order-img">
-                        <div style="height: 81px;overflow:hidden;">
-                            <img alt="" :src="orderIn.goods.gPicture">
-                        </div>
-                    </van-col>
-                    <van-col span="18">
-                        <van-row>
-                            <van-col span="24" class="order-item">{{orderIn.goods.gIntroduce}}</van-col>
-                            <van-col span="24">
-                                <van-divider/>
-                            </van-col>
-                            <van-col span="24" class="order-price">
-                                <van-row>
-                                    <van-col span="10">
-                                        <span style="color: #24292e;">实付款:</span>
-                                        <span style="font-weight: 700;">￥{{orderIn.goods.gPrice}}</span>
-                                    </van-col>
-                                    <span class="span-g">{{orderIn.goods.gTime | dataFmt('YYYY-MM-DD HH:mm')}}</span>
-                                </van-row>
-                            </van-col>
-                        </van-row>
-                    </van-col>
-                </van-row>
-            </div>
-            <div class="contact-m">
-                <ul>
-                    <li>
-                        <van-icon name="chat-o"/>
-                        <span>联系卖家</span></li>
-                    <li>
-                        <van-icon name="more-o"/>
-                        <span>查看评价</span></li>
-                </ul>
-            </div>
+        <div class="addr" v-if="allOrderList" v-for="(orderIn, index) in orderInList" :key="index">
+            <router-link tag="div" :to="`/orderDetail/${orderIn.order.id}`">
+                <div class="head-t">
+                    <img :src="orderIn.user.uHead" alt="">
+                    <span>{{orderIn.user.uEmail}}</span>
+                    <span class="order-z">
+                        <van-tag v-if="orderIn.order.whetherDealt === 0" type="success">等待卖家确认</van-tag>
+                        <van-tag v-if="orderIn.order.whetherDealt === 1" type="warning">卖家已确认</van-tag>
+                        <van-tag v-if="orderIn.order.whetherDealt === 2" type="primary">订单已完成</van-tag>
+                        <van-tag v-if="orderIn.order.whetherDealt === 3" type="danger">订单已失效</van-tag>
+                        <van-tag v-if="orderIn.order.whetherDealt === 4">卖家取消</van-tag>
+                    </span>
+                </div>
+                <div style="width: 100%;">
+                    <van-row>
+                        <van-col span="6" class="order-img">
+                            <div style="height: 81px;overflow:hidden;">
+                                <img alt="" :src="orderIn.goods.gPicture">
+                            </div>
+                        </van-col>
+                        <van-col span="18">
+                            <van-row>
+                                <van-col span="24" class="order-item">{{orderIn.goods.gIntroduce}}</van-col>
+                                <van-col span="24">
+                                    <van-divider/>
+                                </van-col>
+                                <van-col span="24" class="order-price">
+                                    <van-row>
+                                        <van-col span="10">
+                                            <span style="color: #24292e;">实付款:</span>
+                                            <span style="font-weight: 700;">￥{{orderIn.goods.gPrice}}</span>
+                                        </van-col>
+                                        <span class="span-g">{{orderIn.order.time | dataFmt('YYYY-MM-DD HH:mm')}}</span>
+                                    </van-row>
+                                </van-col>
+                            </van-row>
+                        </van-col>
+                    </van-row>
+                </div>
+                <div class="contact-m">
+                    <ul>
+                        <li>
+                            <van-icon name="chat-o"/>
+                            <span>联系卖家</span></li>
+                        <li>
+                            <van-icon name="more-o"/>
+                            <span>查看评价</span></li>
+                    </ul>
+                </div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -67,26 +69,20 @@
         name: 'AllOrder',
         data () {
             return {
-                orderInList: {},
-                orderOutList: {}
+                orderInList: {}
             }
         },
         mounted () {
             this.$store.dispatch('reqOrderList')
             this.orderInList = this.allOrderList.in
             console.log(this.allOrderList)
-            console.log(this.orderInList)
-            // 买家购买，给商家发送信息0，1卖家确认可卖，2订单完成，3订单超出时间，订单作废
-            // whetherDealt
+            // console.log(this.orderInList)
         },
         computed: {
             ...mapState(['allOrderList']),
         },
         methods: {
-            // 返回上一级
-            prev () {
-                this.$router.go(-1)
-            },
+            prev () {this.$router.go(-1)},
         }
     }
 </script>
@@ -117,11 +113,14 @@
             .head-t
                 padding 1px 4px 12px
                 overflow: hidden;
+
                 .order-z
                     float: right;
+
                 span
                     vertical-align middle
                     margin-left 12px
+
                 img
                     width 24px
                     height 24px
@@ -156,7 +155,6 @@
             .contact-m
                 text-align center
                 margin 12px 5%
-
                 ul
                     li
                         display inline-block

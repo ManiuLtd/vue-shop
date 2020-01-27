@@ -9,6 +9,7 @@ import {
     getUserOder,
     getOwnGoods,
     getAllOrder,
+    getOrderDetail
 } from '../api'
 import * as A from './mutation-types'
 import {Toast} from 'vant'
@@ -108,6 +109,14 @@ export default {
         if (result.success) {
             var allOrderList = result.data
             commit(A.RECEIVE_ORDER_LIST, { allOrderList })
+        }
+    },
+    // 根据订单id显示订单的详情
+    async reqOrderDetail ({ commit }, oId) {
+        const result = await getOrderDetail(oId)
+        if (result.success) {
+            var OrderDetail = result.data
+            commit(A.RECEIVE_ORDER_DETAIL, { OrderDetail })
         }
     },
 }

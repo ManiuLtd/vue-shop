@@ -34,19 +34,25 @@ export const getGoodsList = () => ajax(BASE_URL + '/goods')
 // 遍历商品类型
 export const getGoodTypes = () => ajax(BASE_URL + '/goodsType/all')
 // 用户确认下单
-export const getUserOder = (gId) => ajax(BASE_URL + '/goods/' + `${gId}`, gId, 'PUT')
+export const getUserOder = (gId) => ajax(BASE_URL + '/goods/' + `${gId}`, {gId}, 'PUT')
 // 根据类型查询商品
-export const getTypeGoods = (pageNumber, size, tId) => ajax(BASE_URL + '/goods/getPageByType/' + `${pageNumber}/` + `${tId}/` + `${size}`)
+export const getTypeGoods = (pageNumber, size, tId) => ajax(BASE_URL + '/goods/getPageByType/' + `${pageNumber}/` + `${tId}/` + `${size}`, {pageNumber, size, tId})
 // 查看商品的详情
-export const getGoodsInform = (gId) => ajax(BASE_URL + '/goods/2/' + `${gId}`)
+export const getGoodsInform = (gId) => ajax(BASE_URL + '/goods/2/' + `${gId}`, {gId})
 
 // 遍历失物招领信息
 export const getLostList = () => ajax(BASE_URL + '/lost/1')
 
 // 根据页数查询数据
-export const getGoods = (pageNumber) => ajax(BASE_URL + `/goods/page/${pageNumber}`)
+export const getGoods = (pageNumber) => ajax(BASE_URL + `/goods/page/${pageNumber}`, {pageNumber})
 
 // 用户查看自己发布的所有商品
 export const getOwnGoods =() => ajax(BASE_URL + '/goods/own')
 // 返回用户的所有的订单信息
 export const getAllOrder = () => ajax(BASE_URL + '/3')
+// 根据订单id显示订单的详情
+export const getOrderDetail =(oId) => ajax(BASE_URL+ '/detials/'+`${oId}`, {oId})
+// 买家确认付款
+export const getPayment = (oId) => ajax(BASE_URL+'/update/1/' + `${oId}`,{oId}, 'PUT')
+// 卖家确认收款
+export const getCheque = (oId) => ajax(BASE_URL+'/update/2/' + `${oId}`,{oId}, 'PUT')

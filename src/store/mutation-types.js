@@ -12,3 +12,4 @@ export const RECEIVE_ORDER_INFORM = 'receive_order_inform'//用户下单信息
 export const RECEIVE_LOST_LIST = 'receive_lost_list'; // 所有失物招领列表
 export const RECEIVE_OWN_LIST = 'receive_own_list' // 用户查看自己发布的所有商品
 export const RECEIVE_ORDER_LIST = 'receive_order_list'// 返回用户的所有的订单信息
+export const RECEIVE_ORDER_DETAIL = 'receive_order_detail'// 根据订单id显示订单的详情

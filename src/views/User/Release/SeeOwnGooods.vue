@@ -87,10 +87,10 @@
                     return
                 } else {
                     const goodsInform = JSON.parse(JSON.stringify(this.$store.state.goodsInform))
-                    skuData.sku.stock_num = goodsInform.goods.gNumber
-                    skuData.sku.price = goodsInform.goods.gPrice
-                    skuData.quota = goodsInform.goods.gNumber - 1
-                    skuData.goods_info.picture = goodsInform.goods.gPicture
+                    // skuData.sku.stock_num = goodsInform.goods.gNumber
+                    // skuData.sku.price = goodsInform.goods.gPrice
+                    // skuData.quota = goodsInform.goods.gNumber - 1
+                    // skuData.goods_info.picture = goodsInform.goods.gPicture
                     if (goodsInform.goods.gPictures) {
                         const _gPicture = goodsInform.goods.gPictures
                         this.goodsPictures = _gPicture.slice(0, _gPicture.length - 1).split('，')

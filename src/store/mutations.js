@@ -40,4 +40,8 @@ export default {
     [A.RECEIVE_ORDER_LIST] (state, { allOrderList }) {
         state.allOrderList = allOrderList
     },
+    // 根据订单id显示订单的详情
+    [A.RECEIVE_ORDER_DETAIL] (state, { OrderDetail }) {
+        state.OrderDetail = OrderDetail
+    },
 }

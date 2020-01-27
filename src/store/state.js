@@ -10,4 +10,5 @@ export default {
     lostList: [], //所有失物招领
     ownGoodsList: [],// 用户查看自己发布的所有商品
     allOrderList: [],// 返回用户的所有的订单信息
+    OrderDetail: []// 根据订单id显示订单的详情
 }
