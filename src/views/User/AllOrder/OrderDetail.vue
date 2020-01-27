@@ -7,8 +7,29 @@
             </div>
             <div class="ownGoods">我买到的</div>
         </div>
-        <div style="height: 41px"></div>
+        <div style="height: 45px"></div>
         <div v-if="OrderDetail">
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 0" text="喵~~请尽快联系卖家确认该商品是否可卖" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o"/>
+            <span v-if="OrderDetail.order.whetherDealt === 1">
+                 <van-notice-bar v-if="OrderDetail.order.uStatus === 1" text="喵~~该订单您已付款" color="#1989fa"
+                                 background="#ecf9ff" wrapable
+                                 left-icon="info-o"/>
+                <van-notice-bar v-else text="喵~~该订单卖家已确认可卖，是否确认付款" color="#1989fa"
+                                background="#ecf9ff" wrapable
+                                left-icon="info-o"/>
+            </span>
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 2" text="喵~~该订单已完成" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o"/>
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 3" text="喵~~该订单已失效" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o"/>
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 4" text="喵~~卖家已取消该订单" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o"/>
+            <div style="height: 5px;"></div>
             <div class="mui-card">
                 <van-row>
                     <van-col span="6" class="order-img">
@@ -34,8 +55,11 @@
                                         </span>
                                         <span style="font-weight: 700;">￥{{OrderDetail.goods.gPrice}}</span>
                                     </van-col>
-                                    <van-button type="danger" size="mini" v-if="OrderDetail.order.uStatus">已付款</van-button>
-                                    <van-button type="primary" size="mini" v-else @click="payment(OrderDetail.order.id)">确认付款</van-button>
+                                    <van-button type="warning" size="mini" v-if="OrderDetail.order.uStatus">已付款
+                                    </van-button>
+                                    <van-button type="primary" size="mini" v-else
+                                                @click="payment(OrderDetail.order.id)">确认付款
+                                    </van-button>
                                 </van-row>
                             </van-col>
                         </van-row>
@@ -72,7 +96,7 @@
                             <span v-if="OrderDetail.order.whetherDealt === 1">卖家已确认</span>
                             <span v-if="OrderDetail.order.whetherDealt === 2">订单已完成</span>
                             <span v-if="OrderDetail.order.whetherDealt === 3">订单已失效</span>
-                            <span v-if="OrderDetail.order.whetherDealt === 4">卖家取消</span>
+                            <span v-if="OrderDetail.order.whetherDealt === 5">卖家取消</span>
                         </li>
                         <li>
                             <b>下单时间: </b>
@@ -87,6 +111,9 @@
                             <b>卖方确认收款：</b>
                             <span v-if="OrderDetail.order.mStatus">是</span>
                             <span v-else>否</span>
+                        </li>
+                        <li style="float:right;">
+                            <van-button type="info" size="mini" @click="sureSale(OrderDetail.order.id, 5)">取消订单</van-button>
                         </li>
 
                     </ul>
@@ -130,8 +157,9 @@
 
 <script>
     import { mapState } from 'vuex'
-    import {Toast} from 'vant'
-    import {getPayment} from '../../../api/index'
+    import { Toast } from 'vant'
+    import { getPayment, getSale } from '../../../api/index'
+
     export default {
         name: 'OrderDetail',
         mounted () {
@@ -146,10 +174,18 @@
             prev () {
                 this.$router.go(-1)
             },
-            async payment(oId) {
-                const result = await getPayment(oId);
-                console.log(result);
-                Toast(result.msg);
+            async payment (oId) {
+                const result = await getPayment(oId)
+                console.log(result)
+                Toast(result.msg)
+                this.$router.go(0)
+            },
+            // 买家取消订单
+            async sureSale (oId, status) {
+                const result = await getSale(oId, status)
+                if (result.success) {
+                    this.$router.go(0)
+                }
             }
         }
     }

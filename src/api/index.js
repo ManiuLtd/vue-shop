@@ -52,6 +52,8 @@ export const getOwnGoods =() => ajax(BASE_URL + '/goods/own')
 export const getAllOrder = () => ajax(BASE_URL + '/3')
 // 根据订单id显示订单的详情
 export const getOrderDetail =(oId) => ajax(BASE_URL+ '/detials/'+`${oId}`, {oId})
+// 卖家确认可以卖/拒绝卖出（可卖-1，不可卖-4，买家取消订单-5）
+export const getSale = (oId, status) => ajax(BASE_URL+ '/canSale/'+`${oId}/${status}`, {oId, status}, 'PUT')
 // 买家确认付款
 export const getPayment = (oId) => ajax(BASE_URL+'/update/1/' + `${oId}`,{oId}, 'PUT')
 // 卖家确认收款

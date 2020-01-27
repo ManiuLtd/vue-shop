@@ -19,6 +19,11 @@
                     <van-tag v-if="ordeOut.order.whetherDealt === 2" type="primary">订单已完成</van-tag>
                     <van-tag v-if="ordeOut.order.whetherDealt === 3" type="danger">订单已失效</van-tag>
                     <van-tag v-if="ordeOut.order.whetherDealt === 4">卖家取消</van-tag>
+                    <van-tag v-if="ordeOut.order.whetherDealt === 5">买家取消</van-tag>
+                    <span v-if="ordeOut.order.whetherDealt === 1">
+                        <van-tag v-if="ordeOut.order.uStatus" type="primary">买家已付款</van-tag>
+                        <van-tag v-else>买家未付款</van-tag>
+                    </span>
                 </span>
                 </div>
                 <div style="width: 100%;">
@@ -118,11 +123,14 @@
             .head-t
                 padding 1px 4px 12px
                 overflow: hidden;
+
                 .order-z
                     float: right;
+
                 span
                     vertical-align middle
                     margin-left 12px
+
                 img
                     width 24px
                     height 24px

@@ -7,8 +7,29 @@
             </div>
             <div class="ownGoods">我卖出的</div>
         </div>
-        <div style="height: 41px"></div>
+        <div style="height: 45px"></div>
         <div v-if="OrderDetail">
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 0" text="喵~~请尽快确认该商品是否可卖" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o" />
+            <span v-if="OrderDetail.order.whetherDealt === 1">
+                 <van-notice-bar v-if="OrderDetail.order.uStatus === 1" text="喵~~该订单买家已付款， 请尽快确认收款" color="#1989fa"
+                                 background="#ecf9ff" wrapable
+                                 left-icon="info-o"/>
+                <van-notice-bar v-else text="喵~~该订单卖家已确认可卖，是否确认付款" color="#1989fa"
+                                background="#ecf9ff" wrapable
+                                left-icon="info-o"/>
+            </span>
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 2" text="喵~~该订单已完成" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o" />
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 3" text="喵~~该订单已失效" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o" />
+            <van-notice-bar v-if="OrderDetail.order.whetherDealt === 4" text="喵~~卖家已取消该订单" color="#1989fa"
+                            background="#ecf9ff"
+                            left-icon="info-o" />
+            <div style="height: 5px;"></div>
             <div class="mui-card">
                 <van-row>
                     <van-col span="6" class="order-img">
@@ -31,10 +52,10 @@
                                         <span style="color: #24292e;">
                                             <span v-if="OrderDetail.order.uStatus===0">应收款:</span>
                                             <span v-else>实收款:</span>
+                                            <span style="font-weight: 700;">￥{{OrderDetail.goods.gPrice}}</span>
                                         </span>
-                                        <span style="font-weight: 700;">￥{{OrderDetail.goods.gPrice}}</span>
                                     </van-col>
-                                    <van-button type="danger" size="mini" v-if="OrderDetail.order.mStatus">已收款收款</van-button>
+                                    <van-button type="warning" size="mini" v-if="OrderDetail.order.mStatus">已收款</van-button>
                                     <van-button type="primary" size="mini" v-else @click="payment(OrderDetail.order.id)">确认收款</van-button>
                                 </van-row>
                             </van-col>
@@ -43,14 +64,15 @@
                 </van-row>
                 <div class="contact-m">
                     <ul>
-                        <li>
-                            <van-icon name="chat-o"/>
-                            <span>联系买家</span></li>
-                        <li>
-                            <van-icon name="more-o"/>
-                            <span>查看评价</span></li>
+                        <li><van-icon name="chat-o"/><span>联系买家</span></li>
+                        <li><van-icon name="more-o"/><span>查看评价</span></li>
                     </ul>
                 </div>
+            </div>
+            <div v-if="OrderDetail.order.whetherDealt === 0" class="mui-card sale-t" >
+                该商品是否可卖？
+                <van-button  type="info" size="mini" @click="sureSale(OrderDetail.order.id, 1)">同意卖出</van-button>
+                <van-button plain type="info" size="mini" @click="sureSale(OrderDetail.order.id, 4)">拒绝卖出</van-button>
             </div>
             <div class="mui-card">
                 <van-divider :style="{ color: '#fc9153', borderColor: '#fc9153', padding: '0 16px' }">
@@ -94,7 +116,7 @@
             </div>
             <div class="mui-card">
                 <van-divider :style="{ color: '#fc9153', borderColor: '#fc9153', padding: '0 16px' }">
-                    发布者信息
+                    买家信息
                 </van-divider>
                 <div class="mui-card-header">关于买家</div>
                 <div class="mui-card-disc">
@@ -130,8 +152,8 @@
 
 <script>
     import { mapState } from 'vuex'
-    import {Toast} from 'vant'
-    import {getCheque} from '../../../api/index'
+    import {Toast } from 'vant'
+    import {getCheque, getSale} from '../../../api/index'
     export default {
         name: 'OrderDetail',
         mounted () {
@@ -146,10 +168,18 @@
             prev () {
                 this.$router.go(-1)
             },
+            // 确认收款
             async payment(oId) {
                 const result = await getCheque(oId);
-                console.log(result);
                 Toast(result.msg);
+                this.$router.go(0);
+            },
+            // 确认是否可卖
+            async sureSale(oId, status) {
+                const result = await getSale(oId, status);
+                if (result.success) {
+                    this.$router.go(0);
+                }
             }
         }
     }
@@ -168,6 +198,9 @@
             color #FFF
             width: 72%;
             font-size 14px
+            text-align center
+        .sale-t
+            padding 12px 0
             text-align center
 
         .order-img

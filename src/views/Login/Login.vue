@@ -85,69 +85,69 @@
 </template>
 
 <script>
-  import { login } from '../../api'
-  import { Toast } from 'vant'
+    import { login } from '../../api'
+    import { Toast } from 'vant'
 
-  export default {
-    name: 'login',
-    data () {
-      return {
-        email: '',
-        password: '',
-        rePassword: '',
-        flag: '',
-        showPwd: true, // 是否显示密码
-      }
-    },
-    computed: {
-      rightEmail () {
-        var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g
-        return regEmail.test(this.email)
-      }
-    },
-    methods: {
-      goTo (path) {
-        this.$router.replace(path)
-      },
-      // 信息提示
-      showAlert (alertText) {
-        Toast({
-          message: alertText,
-          duration: 2500
-        })
-      },
-      async login () {
-        if (this.flag) {
-          this.flag = 1
-        } else {
-          this.flag = 0
+    export default {
+        name: 'login',
+        data () {
+            return {
+                email: '',
+                password: '',
+                rePassword: '',
+                flag: '',
+                showPwd: true, // 是否显示密码
+            }
+        },
+        computed: {
+            rightEmail () {
+                var regEmail = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/g
+                return regEmail.test(this.email)
+            }
+        },
+        methods: {
+            goTo (path) {
+                this.$router.replace(path)
+            },
+            // 信息提示
+            showAlert (alertText) {
+                Toast({
+                    message: alertText,
+                    duration: 2500
+                })
+            },
+            async login () {
+                if (this.flag) {
+                    this.flag = 1
+                } else {
+                    this.flag = 0
+                }
+                const { email, password, flag, showAlert } = this
+                if (!email) {
+                    showAlert('请输入邮箱号！')
+                } else if (!password) {
+                    showAlert('请输入登录密码！')
+                } else {
+                    console.log(flag)
+                    let result = await login(email, password, flag)
+                    console.log(result)
+                    if (result.success) {
+                        showAlert(result.msg)
+                        const user = result.data
+                        var session = window.sessionStorage
+                        var d = JSON.stringify(user)
+                        session.setItem('data', d)
+                        let userInfo = JSON.parse(sessionStorage.getItem('data'))
+                        // 将user保存到vuex的state
+                        this.$store.dispatch('recordUser', userInfo)
+                        this.$router.go(-1)
+                    } else {
+                        showAlert(result.msg)
+                    }
+                }
+            }
         }
-        const { email, password, flag, showAlert } = this
-        if (!email) {
-          showAlert('请输入邮箱号！')
-        } else if (!password) {
-          showAlert('请输入登录密码！')
-        } else {
-          console.log(flag)
-          let result = await login(email, password, flag)
-          console.log(result)
-          if (result.success) {
-            showAlert(result.msg)
-            const user = result.data
-            var session = window.sessionStorage
-            var d = JSON.stringify(user)
-            session.setItem('data', d)
-            let userInfo = JSON.parse(sessionStorage.getItem('data'))
-            // 将user保存到vuex的state
-            this.$store.dispatch('recordUser', userInfo)
-            this.$router.go(-1)
-          } else {
-            showAlert(result.msg)
-          }
-        }
-      }
     }
-  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/styLus">

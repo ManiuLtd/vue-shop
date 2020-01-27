@@ -19,6 +19,7 @@
                         <van-tag v-if="orderIn.order.whetherDealt === 2" type="primary">订单已完成</van-tag>
                         <van-tag v-if="orderIn.order.whetherDealt === 3" type="danger">订单已失效</van-tag>
                         <van-tag v-if="orderIn.order.whetherDealt === 4">卖家取消</van-tag>
+                        <van-tag v-if="orderIn.order.whetherDealt === 5">买家取消</van-tag>
                     </span>
                 </div>
                 <div style="width: 100%;">
